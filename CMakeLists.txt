@@ -1,0 +1,22 @@
+cmake_minimum_required(VERSION 3.25)
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+
+project(pythonicpp VERSION 0.1.0
+    DESCRIPTION "use c++ in pythonic way")
+
+option(PYTHONICPP_BUILD_TEST "build tests" ON)
+
+add_library(pythonicpp INTERFACE)
+target_include_directories(pythonicpp INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>)
+
+if(PYTHONICPP_BUILD_TEST)
+    add_subdirectory(test)
+endif()
